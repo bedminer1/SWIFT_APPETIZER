@@ -28,9 +28,9 @@ struct MockData {
                                            description: "Test Description",
                                            price: 9.99,
                                            imageURL: "https://seanallen-course-backend.herokuapp.com/images/appetizers/asian-flank-steak.jpg",
-                                           calories: 99,
-                                           protein: 99,
-                                           carbs: 99)
+                                           calories: 700,
+                                           protein: 12,
+                                           carbs: 19)
     
     static let appetizers = [sampleAppetizer, sampleAppetizer, sampleAppetizer, sampleAppetizer]
 }
