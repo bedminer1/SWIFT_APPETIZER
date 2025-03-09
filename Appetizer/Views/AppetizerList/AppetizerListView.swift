@@ -28,6 +28,8 @@ struct AppetizerListView: View {
             .onAppear {
                 viewModel.getAppetizers()
             }
+            .blur(radius: isShowingDetail ? 20 : 0)
+            .disabled(isShowingDetail)
             
             if isShowingDetail {
                 AppetizerDetailView(appetizer: selectedAppetizer ?? MockData.sampleAppetizer,
