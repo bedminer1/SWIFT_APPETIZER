@@ -8,39 +8,39 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State private var firstName = ""
-    @State private var lastName = ""
-    @State private var email = ""
-    @State private var birthday = Date()
-    @State private var extraNapkins = false
-    @State private var frequentRefills = false
+    @StateObject private var vm = AccountVM()
 
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Personal Info")) {
-                    TextField("First Name", text: $firstName)
-                    TextField("Last Name", text: $lastName)
-                    TextField("Email Name", text: $email)
+                    TextField("First Name", text: $vm.firstName)
+                    TextField("Last Name", text: $vm.lastName)
+                    TextField("Email Name", text: $vm.email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    DatePicker("Birthday", selection: $birthday,
+                    DatePicker("Birthday", selection: $vm.birthday,
                                displayedComponents: .date)
                     Button {
-                        print("Save")
+                        vm.saveChanges()
                     } label: {
                         Text("Save Changes")
                     }
                     
                 }
                 Section(header: Text("Requests")) {
-                    Toggle("Extra Napkins", isOn: $extraNapkins)
-                    Toggle("Frequent Refills", isOn: $frequentRefills)
+                    Toggle("Extra Napkins", isOn: $vm.extraNapkins)
+                    Toggle("Frequent Refills", isOn: $vm.frequentRefills)
                 }
                 .toggleStyle(SwitchToggleStyle(tint: Color("brandPrimary")))
             }
             .navigationTitle(Text("Account"))
+        }
+        .alert(item: $vm.alertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
         }
     }
 }
